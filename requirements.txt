@@ -3,4 +3,5 @@ Flask-SQLAlchemy
 Flask-JWT-Extended
 psycopg2-binary
 python-dotenv
-gunicorn
+gunicornpytest
+pytest
