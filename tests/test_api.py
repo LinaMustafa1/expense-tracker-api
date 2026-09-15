@@ -185,3 +185,37 @@ def test_expense_rejects_missing_amount():
     )
 
     assert response.status_code == 400
+
+def test_get_nonexistent_expense_returns_404():
+    app = create_app()
+    client = app.test_client()
+
+    client.post(
+        "/register",
+        json={
+            "email": "notfound@test.com",
+            "password": "Test1234"
+        }
+    )
+
+    login = client.post(
+        "/login",
+        json={
+            "email": "notfound@test.com",
+            "password": "Test1234"
+        }
+    )
+    token = login.get_json()["access_token"]
+
+    response = client.get(
+        "/expenses/999999",
+        headers={
+            "Authorization": f"Bearer {token}"
+        }
+    )
+
+    assert response.status_code == 404
+    assert response.get_json()["error"] == "expense not found"
+
+    assert response.status_code == 404
+    assert response.get_json()["error"] == "expense not found"
