@@ -76,7 +76,7 @@ def test_expense_creation_is_idempotent():
 
     headers = {
         "Authorization": f"Bearer {token}",
-        "Idempotency-Key": "idempotent-test-002"
+        "Idempotency-Key": "idempotent-test-003-new"
     }
 
     first = client.post(
@@ -103,3 +103,34 @@ def test_expense_creation_is_idempotent():
     assert second.status_code == 200
     assert first.get_json()["id"] == second.get_json()["id"]
     assert second.get_json()["message"] == "original result returned"
+
+
+def test_expense_rejects_invalid_amount():
+    app = create_app()
+    client = app.test_client()
+
+    client.post(
+        "/register",
+        json={"email": "invalid@test.com", "password": "Test1234"}
+    )
+
+    login = client.post(
+        "/login",
+        json={"email": "invalid@test.com", "password": "Test1234"}
+    )
+    token = login.get_json()["access_token"]
+
+    response = client.post(
+        "/expenses",
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Idempotency-Key": "invalid-amount-test-001"
+        },
+        json={
+            "amount": "not-a-number",
+            "category": "Food",
+            "description": "Invalid expense"
+        }
+    )
+
+    assert response.status_code == 400
