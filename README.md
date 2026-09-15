@@ -66,3 +66,5 @@ pytest
 The tests cover authentication, user data isolation, idempotent expense creation, and invalid or missing expense data.
 
 API documentation and testing information are included in this README.
+
+The API can be tested locally using pytest after installing the project dependencies.
