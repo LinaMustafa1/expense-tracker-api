@@ -64,3 +64,5 @@ pytest
 ```
 
 The tests cover authentication, user data isolation, idempotent expense creation, and invalid or missing expense data.
+
+API documentation and testing information are included in this README.
