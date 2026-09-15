@@ -37,7 +37,7 @@ A REST API for managing personal expenses, built with Python, Flask, PostgreSQL,
 ### 1. Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/LinaMustafa1/expense-tracker-api.git
 cd expense-tracker-api
 ```
 
@@ -81,6 +81,9 @@ The API will run locally at:
 ```text
 http://127.0.0.1:5000
 ```
+
+Live API:
+https://expense-tracker-api-lx1f.onrender.com
 
 ## Authentication
 
