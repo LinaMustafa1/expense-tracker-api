@@ -76,7 +76,7 @@ def test_expense_creation_is_idempotent():
 
     headers = {
         "Authorization": f"Bearer {token}",
-        "Idempotency-Key": "idempotent-test-001"
+        "Idempotency-Key": "idempotent-test-002"
     }
 
     first = client.post(
